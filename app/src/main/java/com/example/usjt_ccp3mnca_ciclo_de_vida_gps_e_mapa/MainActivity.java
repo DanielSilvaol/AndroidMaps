@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -27,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private LocationListener locationListener;
     private static final int REQUEST_CODE_GPS = 1001;
     private TextView textView;
-    private Location localizacaoAtual;
+    private Location localizacao;
+
+    private ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,31 +43,36 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                double lat = localizacaoAtual.getLatitude();
-                double lon = localizacaoAtual.getLongitude();
-                @SuppressLint("DefaultLocale") Uri uri = Uri.parse(String.format("geo:%f,%f?q=restaurantes",lat,lon));
-                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
-                intent.setPackage("com.google.android.apps.maps");
-                startActivityForResult(intent,1);
+                Intent intent = new Intent(MainActivity.this, ListaEnderecosActivity.class);
+                intent.putStringArrayListExtra("lista", list);
+                startActivity(intent);
             }
         });
 
 
         textView = findViewById(R.id.LOCALIZACAO_TEXT);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
         locationListener = new LocationListener() {
             @SuppressLint("DefaultLocale")
             @Override
             public void onLocationChanged(Location location) {
-                localizacaoAtual = location;
                 double lat = location.getLatitude();
                 double log = location.getLongitude();
                 textView.setText(String.format("Lat: %f, Long: %f", lat, log));
+                if (localizacao == null){
+                    localizacao = location;
+                    list.add(String.valueOf(lat) + "," + String.valueOf(log));
+                }
+                    double var = getDistanceBetween(localizacao, location);
 
+                if (var > 200 && list.size() <= 50) {
+                    localizacao.setLatitude(lat);
+                    localizacao.setLongitude(log);
+                    list.add(String.valueOf(lat) + "," + String.valueOf(log));
+                }
             }
 
             @Override
@@ -110,5 +121,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, getString(R.string.no_gps_no_app), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public static Double getDistanceBetween(Location latLon1, Location latLon2) {
+        if (latLon1 == null || latLon2 == null)
+            return null;
+        float[] result = new float[1];
+        Location.distanceBetween(latLon1.getLatitude(), latLon1.getLongitude(), latLon2.getLatitude(), latLon2.getLongitude(), result);
+        return (double) result[0];
     }
 }
