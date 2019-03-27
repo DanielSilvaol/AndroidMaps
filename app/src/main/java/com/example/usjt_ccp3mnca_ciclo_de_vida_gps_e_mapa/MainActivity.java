@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private Location localizacao;
 
-    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Enderecos> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +41,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListaEnderecosActivity.class);
-                intent.putStringArrayListExtra("lista", list);
+                intent.putExtra("lista", list);
                 startActivity(intent);
             }
         });
@@ -61,17 +62,18 @@ public class MainActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
                 double lat = location.getLatitude();
                 double log = location.getLongitude();
-                textView.setText(String.format("Lat: %f, Long: %f", lat, log));
+                Enderecos enderecos = new Enderecos(log,lat);
+                textView.setText(String.format("Lat: %.2f, Long: %.2f", lat, log));
                 if (localizacao == null){
                     localizacao = location;
-                    list.add(String.valueOf(lat) + "," + String.valueOf(log));
+                    list.add(enderecos);
                 }
                     double var = getDistanceBetween(localizacao, location);
 
                 if (var > 200 && list.size() <= 50) {
                     localizacao.setLatitude(lat);
                     localizacao.setLongitude(log);
-                    list.add(String.valueOf(lat) + "," + String.valueOf(log));
+                    list.add(enderecos);
                 }
             }
 

@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,26 +22,26 @@ public class ListaEnderecosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_enderecos);
+
         chamadosListView = findViewById(R.id.chamadosLisView);
         Intent origemIntent = getIntent();
-        final List<String> chamados = origemIntent.getStringArrayListExtra("lista");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,chamados);
-        chamadosListView.setAdapter(adapter);
+
+        final ArrayList<Enderecos> enderecos  = (ArrayList<Enderecos>) origemIntent.getSerializableExtra("lista");
+        EnderacosArrayAdapter arrayAdapter = new EnderacosArrayAdapter(this,enderecos);
+        chamadosListView.setAdapter(arrayAdapter );
         chamadosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long l) {
-            String local = chamados.get(posicao);
-            String[] localizacaoAtual = local.split(",");
 
-                double lat = Double.parseDouble(localizacaoAtual[0]);
-                double lon = Double.parseDouble(localizacaoAtual[1]);
-                String latAux = String.valueOf(lat).replace(',',',');
-                String longAux =String.valueOf(lon).replace(',','.');
-                @SuppressLint("DefaultLocale") Uri uri = Uri.parse(String.format("geo:%f,%f?q=%s,%s",lat,lon,latAux,longAux));
+                Enderecos enderecos01 = enderecos.get(posicao);
+                String latAux = String.valueOf(enderecos01.getLatetude()).replace(',',',');
+                String longAux =String.valueOf(enderecos01.getLongetude()).replace(',','.');
+                @SuppressLint("DefaultLocale") Uri uri = Uri.parse(String.format("geo:%f,%f?q=%s,%s",enderecos01.getLatetude(),enderecos01.getLongetude(),latAux,longAux));
+
                 Intent intent = new Intent(Intent.ACTION_VIEW,uri);
                 intent.setPackage("com.google.android.apps.maps");
-                startActivityForResult(intent,1);
-
+//                startActivityForResult(intent,1);
+                startActivity(intent);
             }
         });
     }
