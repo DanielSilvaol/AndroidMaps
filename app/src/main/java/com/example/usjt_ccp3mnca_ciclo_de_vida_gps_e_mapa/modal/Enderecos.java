@@ -1,4 +1,4 @@
-package com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa;
+package com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.modal;
 
 import java.io.Serializable;
 

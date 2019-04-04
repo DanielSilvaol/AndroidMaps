@@ -1,4 +1,4 @@
-package com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa;
+package com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.Activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -8,11 +8,9 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,9 +18,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
+import com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.R;
+import com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.modal.Enderecos;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
