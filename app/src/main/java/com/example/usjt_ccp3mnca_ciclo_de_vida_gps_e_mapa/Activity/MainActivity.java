@@ -19,13 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.R;
+import com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.dao.LocalizacaoDAO;
 import com.example.usjt_ccp3mnca_ciclo_de_vida_gps_e_mapa.modal.Enderecos;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private LocalizacaoDAO localizacaoDAO;
     private LocationManager locationManager;
     private LocationListener locationListener;
     private static final int REQUEST_CODE_GPS = 1001;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        localizacaoDAO = new LocalizacaoDAO(this);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("DefaultLocale")
             @Override
             public void onLocationChanged(Location location) {
+
+
                 double lat = location.getLatitude();
                 double log = location.getLongitude();
                 Enderecos enderecos = new Enderecos(log,lat);
