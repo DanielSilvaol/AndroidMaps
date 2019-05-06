@@ -33,7 +33,6 @@ public class EnderecosRecyclerViewAdapter extends RecyclerView.Adapter<Localizac
     @Override
     public void onBindViewHolder(@NonNull LocalizacaoViewHolder locaisViewHolder, int i) {
         Enderecos localizacao = localizacoes.get(i);
-        locaisViewHolder.iconLocalizacaoImageView.setImageResource(R.drawable.ic_location_on_black_24dp);
         locaisViewHolder.longitudeTextView.setText("Longitude: " + localizacao.getLongetude());
         locaisViewHolder.latitudeTextView.setText("Latitude: " + localizacao.getLatetude());
     }

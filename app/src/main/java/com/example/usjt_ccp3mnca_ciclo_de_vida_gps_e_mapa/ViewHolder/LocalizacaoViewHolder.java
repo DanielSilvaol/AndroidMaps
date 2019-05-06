@@ -14,8 +14,8 @@ public class LocalizacaoViewHolder extends RecyclerView.ViewHolder {
 
     public LocalizacaoViewHolder(View itemView) {
         super(itemView);
-        iconLocalizacaoImageView = itemView.findViewById(R.id.iconLocalizacaoImageView);
-        latitudeTextView = itemView.findViewById(R.id.latitudeTextView);
-        longitudeTextView = itemView.findViewById(R.id.longitudeTextView);
+        iconLocalizacaoImageView = itemView.findViewById(R.id.icon);
+//        latitudeTextView = itemView.findViewById(R.id.latitudeTextView);
+//        longitudeTextView = itemView.findViewById(R.id.longitudeTextView);
     }
 }

@@ -1,5 +1,10 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="fab_margin_top">75dp</dimen>
     <dimen name="fila_icon_width">50dp</dimen>
+    <dimen name="fab_margin_top">75dp</dimen>
+    <dimen name="fab_cardview_slides">5dp</dimen>
+    <dimen name="fab_cardview_top">6dp</dimen>
+    <dimen name="image_side_length">58dp</dimen>
+    <dimen name="margin_cardview_sides">8dp</dimen>
+    <dimen name="margin_cardview_top">4dp</dimen>
 </resources>

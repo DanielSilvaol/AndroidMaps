@@ -30,15 +30,15 @@ public class EnderacosArrayAdapter extends ArrayAdapter<Enderecos> {
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.list_item, parent, false);
             vh = new ViewHolder();
-            vh.filaIconImageView = convertView.findViewById(R.id.iconLocalizacaoImageView);
+            vh.filaIconImageView = convertView.findViewById(R.id.icon);
             convertView.setTag(vh);
         }
         vh = (ViewHolder) convertView.getTag();
-        TextView latitude = convertView.findViewById(R.id.latitudeTextView);
-        TextView longitude = convertView.findViewById(R.id.longitudeTextView);
+//        TextView latitude = convertView.findViewById(R.id.latitudeTextView);
+//        TextView longitude = convertView.findViewById(R.id.longitudeTextView);
 
-        latitude.setText("Lat: " + (enderecos != null ? String.format("%.4f", enderecos.getLatetude()) : null));
-        longitude.setText("Long: " + (enderecos != null ? String.format("%.4f", enderecos.getLongetude()) : null));
+//        latitude.setText("Lat: " + (enderecos != null ? String.format("%.4f", enderecos.getLatetude()) : null));
+//        longitude.setText("Long: " + (enderecos != null ? String.format("%.4f", enderecos.getLongetude()) : null));
         return convertView;
     }
 
